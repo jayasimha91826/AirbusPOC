@@ -12,6 +12,7 @@ const SideBar = () => {
 
   const handleColorChange = (event, item) => {
     dispatch(setColorFilter(item));
+    
   };
   return (
     <Grid2 container direction="column" rowGap={2} paddingLeft={2}>
