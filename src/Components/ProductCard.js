@@ -11,7 +11,7 @@ import cancel from "../assets/cancel.svg"
 import {IconButton} from '@mui/material';
 const ProductCard = ({ cardData }) => {
   const dispatch = useDispatch()
-  // console.log("carddata",cardData);
+
   const handleCancel=(event,cardId)=>{
     debugger
     dispatch(clearCartItems(cardId))
@@ -22,10 +22,8 @@ const ProductCard = ({ cardData }) => {
     debugger
     dispatch(setCartCount(cardData))
 
-    // console.log("onclick", cardData);
-
   }
-  // ==============================================
+  
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>

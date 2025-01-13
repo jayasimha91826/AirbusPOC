@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartITemsFilter, searchedProducts } from "../redux/slice";
+import { cartItemsFilter, searchedProducts } from "../redux/slice";
 // import ProductCard from "./ProductCard";
 
 export default function NavBar() {
@@ -23,7 +23,7 @@ export default function NavBar() {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value)
     if(window.location.href.includes("cart")){
-        dispatch(cartITemsFilter(event.target.value))
+        dispatch(cartItemsFilter(event.target.value))
     }
     else
     dispatch(searchedProducts(event.target.value));

@@ -6,14 +6,16 @@ import Home from './Components/Home.js'; // Home component
 import Cart from './Components/Cart.js';
 import { Divider, Grid2 } from '@mui/material';
 import SideBar from './Components/SideBar.js';
+import { useSelector } from 'react-redux';
+import Loader from './Components/Loader.js';
 
 function App() {
-
-  // console.log(data);
+  const isLoading = useSelector((state) =>state.product.isLoading)
 
   return (
     <>
       <NavBar />
+      {isLoading && <Loader open={isLoading}/>}
       <Grid2 container direction="row" padding={"10px"} columnGap={1}>
         <Grid2 item size={{ xs: 6, md: 4 }}>
           <SideBar/>

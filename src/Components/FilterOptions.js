@@ -1,20 +1,49 @@
 import { Grid2, Radio, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useDispatch } from "react-redux";
-import { searchedProducts, setBrandFilter, setTypeFilter } from "../redux/slice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  searchedProducts,
+  setBrandFilter,
+  setTypeFilter,
+} from "../redux/slice";
 
 const FilterOptions = ({ data, isType }) => {
+  const [selectedType, setSelectedType] = useState("");
+  const isFiltersCleared = useSelector((state) => state.product.isFiltersCleared)
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     if (isType) {
-      dispatch(setTypeFilter(event.target.value));
+      if (selectedType === event.target.value) {
+        debugger;
+        setSelectedType(null);
+        dispatch(
+            setTypeFilter({
+              value: event.target.value,
+              isChecked: false,
+            })
+          );
+      } else {
+        debugger;
+        setSelectedType(event.target.value);
+        dispatch(
+            setTypeFilter({
+              value: event.target.value,
+              isChecked: true,
+            })
+          );
+      }
     } else {
-      dispatch(setBrandFilter(event.target.value));
+      dispatch(
+        setBrandFilter({
+          value: event.target.value,
+          isChecked: event.target.checked,
+        })
+      );
     }
-    dispatch(searchedProducts(event.target.value))
+    dispatch(searchedProducts(event.target.value));
   };
 
   return (
@@ -28,22 +57,30 @@ const FilterOptions = ({ data, isType }) => {
       padding={1}
     >
       {data.map((item, index) => (
-        <Grid2 item container justifyContent="space-between" width="100%">
+        <Grid2
+          item
+          container
+          justifyContent="space-between"
+          width="100%"
+          key={index}
+        >
           <Grid2 item>
             <Typography>{item}</Typography>
           </Grid2>
           <Grid2 item>
             {" "}
             <FormControlLabel
-              //   required
               control={
                 isType ? (
-                  <Radio onClick={handleChange} value={item} />
+                  <Radio
+                    onClick={handleChange}
+                    value={item}
+                    checked={isType ? selectedType === item : isFiltersCleared && false}
+                  />
                 ) : (
                   <Checkbox onClick={handleChange} value={item} />
                 )
               }
-              //   label="Required"
             />
           </Grid2>
         </Grid2>
