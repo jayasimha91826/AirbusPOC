@@ -28,7 +28,7 @@ function Home() {
     // console.log(data);
 
     return (
-        <Grid2 container columnGap={2} rowGap={2} justifyContent={"center"}>
+        <Grid2 container columnGap={2} width={"70vw"} rowGap={2} justifyContent={"flex-start"}>
             {/* <h2>Welcome to the Home Page</h2> */}
             {(searchedData.length > 0) && (searchedData.map((i, index) => (
                 <Grid2 item key={index}>  <ProductCard cardData={i} /></Grid2> // Use a key prop when mapping lists 

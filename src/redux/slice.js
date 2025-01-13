@@ -7,8 +7,7 @@ const initialState = {
     cartITems: [],
     searchedProducts: [],
     searchedCartItems: [],
-    
-
+    colors:[]
 };
 
 const productSlice = createSlice({
@@ -18,6 +17,7 @@ const productSlice = createSlice({
         setProducts: (state, action) => {
             state.products = action.payload;
             state.searchedProducts = action.payload;
+            state.colors=Array.from(new Set(action.payload.map((item) => item.color)))
         },
         
         cartITemsFilter: (state, action) => {
@@ -26,6 +26,12 @@ const productSlice = createSlice({
         searchedProducts: (state, action) => {
             state.searchedProducts = state.products.filter((item) => item.pdtName.toLowerCase().includes(action.payload))
 
+        },
+        clearCartItems:(state,action)=>{
+            debugger
+            state.cartITems=state.cartITems.filter((item)=>item.id!==action.payload)
+            state.searchedCartItems=state.cartITems.filter((item)=>item.id!==action.payload)
+            state.cartCount=state.cartCount-1
         },
         setCartCount: (state, action) => {
 
@@ -62,6 +68,6 @@ const productSlice = createSlice({
     },
 });
 
-export const { setProducts,  setCartCount, searchedProducts , cartITemsFilter} = productSlice.actions;
+export const { setProducts, clearCartItems, setCartCount, searchedProducts , cartITemsFilter} = productSlice.actions;
 
 export default productSlice.reducer;
