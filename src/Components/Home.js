@@ -18,7 +18,7 @@ function Home() {
           const data = response;
           setData(data);
           dispatch(setProducts(data));
-          dispatch(setIsLoading(false))
+          dispatch(setIsLoading(false));
         })
         .catch((error) => {
           console.error(error);
@@ -30,21 +30,21 @@ function Home() {
     <Grid2
       container
       columnGap={2}
-      width={"70vw"}
-      maxHeight="100vh"
       rowGap={2}
-      justifyContent={"flex-start"}
+      justifyContent={"center"}
+      sx={{ overflowY: "auto !important" }}
     >
       {searchedData.length > 0 ? (
         searchedData.map((i, index) => (
-          <Grid2 item key={index}>
+          <Grid2 item key={index} size={{ xs: 12, md: 2.8 }}>
             {" "}
             <ProductCard cardData={i} />
           </Grid2>
         ))
-      ) :  (
+      ) : (
         <Typography>
-          Uh-oh, no products present in the filtered Combination. Please try filter with valid Combination
+          Uh-oh, no products present in the filtered Combination. Please try
+          filter with valid Combination
         </Typography>
       )}
     </Grid2>

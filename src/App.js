@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './Components/NavBar.js'; // Assuming NavBar is in the same directory
@@ -16,14 +15,14 @@ function App() {
     <>
       <NavBar />
       {isLoading && <Loader open={isLoading}/>}
-      <Grid2 container direction="row" padding={"10px"} columnGap={1}>
-        <Grid2 item size={{ xs: 6, md: 4 }}>
+      <Grid2 container direction="row" padding={"10px"} columnGap={1} className="content">
+        <Grid2 item size={{ xs: 6, md: 3 }}>
           <SideBar/>
         </Grid2>
         <Grid2>
           <Divider orientation='vertical'/>
         </Grid2>
-        <Grid2 item size={{ xs: 6, md: 7 }}>
+        <Grid2 item size={{ xs: 6, md: 8 }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />

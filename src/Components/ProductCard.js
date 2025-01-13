@@ -1,47 +1,49 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
-import { Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { clearCartItems, setCartCount } from '../redux/slice';
-import cancel from "../assets/cancel.svg"
-import {IconButton} from '@mui/material';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
+import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { clearCartItems, setCartCount } from "../redux/slice";
+import cancel from "../assets/cancel.svg";
+import { IconButton } from "@mui/material";
 const ProductCard = ({ cardData }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const handleCancel=(event,cardId)=>{
-    debugger
-    dispatch(clearCartItems(cardId))
-
-  }
+  const handleCancel = (event, cardId) => {
+    debugger;
+    dispatch(clearCartItems(cardId));
+  };
 
   const handleAddToCart = (event, cardData) => {
-    debugger
-    dispatch(setCartCount(cardData))
+    debugger;
+    dispatch(setCartCount(cardData));
+  };
 
-  }
-  
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{}}>
       <CardActionArea>
-        {window.location.href.includes("cart") && <IconButton
-          aria-label="cancel"
-          onClick={(event)=>handleCancel(event,cardData.id)}
-          sx={{
-            position: 'absolute',
-            top: 8,
-            right: 8,
-            zIndex: 1,
-            color: 'black',
-            backgroundColor: 'white',
-            '&:hover': {
-              backgroundColor: 'grey.200',
-            },
-            
-          }}>{<img src={cancel}></img>}</IconButton>}
+        {window.location.href.includes("cart") && (
+          <IconButton
+            aria-label="cancel"
+            onClick={(event) => handleCancel(event, cardData.id)}
+            sx={{
+              position: "absolute",
+              top: 8,
+              right: 8,
+              zIndex: 1,
+              color: "black",
+              backgroundColor: "white",
+              "&:hover": {
+                backgroundColor: "grey.200",
+              },
+            }}
+          >
+            {<img src={cancel}></img>}
+          </IconButton>
+        )}
         <CardMedia
           component="img"
           height="140"
@@ -49,14 +51,21 @@ const ProductCard = ({ cardData }) => {
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            className={cardData.pdtName.length > 15 ? "truncate" : ""}
+          >
             {cardData.pdtName}
           </Typography>
-          <Button onClick={(event) => handleAddToCart(event, cardData)}>AddtoCart</Button>
+          <Button onClick={(event) => handleAddToCart(event, cardData)}>
+            AddtoCart
+          </Button>
         </CardContent>
       </CardActionArea>
     </Card>
   );
-}
+};
 
 export default ProductCard;

@@ -52,7 +52,7 @@ const FilterOptions = ({ data, isType }) => {
       direction="column"
       height="30vh"
       overflow="auto"
-      width="28vw"
+      width="20.5vw"
       flexWrap="nowrap"
       padding={1}
     >
