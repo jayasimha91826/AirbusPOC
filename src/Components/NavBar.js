@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartITemsFilter, searchedProducts } from "./redux/slice";
+import { cartITemsFilter, searchedProducts } from "../redux/slice";
 // import ProductCard from "./ProductCard";
 
 export default function NavBar() {
