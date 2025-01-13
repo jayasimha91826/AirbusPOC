@@ -7,7 +7,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { clearCartItems, setCartCount } from '../redux/slice';
-import cancel from "./assets/cancel.svg"
+import cancel from "../assets/cancel.svg"
 import {IconButton} from '@mui/material';
 const ProductCard = ({ cardData }) => {
   const dispatch = useDispatch()

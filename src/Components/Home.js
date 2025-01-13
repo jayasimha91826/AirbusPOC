@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getProductData } from './services/service';
+import { getProductData } from '../services/service';
 import Card from "./ProductCard";
 import ProductCard from "./ProductCard";
 import { Grid2 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setProducts } from "./redux/slice";
+import { setProducts } from "../redux/slice";
 
 function Home() {
     // Initialize state with the productData prop

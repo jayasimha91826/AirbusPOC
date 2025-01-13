@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './Components/NavBar.js'; // Assuming NavBar is in the same directory
-import Home from './Home'; // Home component
-import Cart from './Cart.js';
+import Home from './Components/Home.js'; // Home component
+import Cart from './Components/Cart.js';
 import { Divider, Grid2 } from '@mui/material';
 import SideBar from './Components/SideBar.js';
 
