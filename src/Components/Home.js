@@ -9,6 +9,7 @@ import { setIsLoading, setProducts } from "../redux/slice";
 function Home() {
   const [data, setData] = useState([]);
   const searchedData = useSelector((state) => state.product.searchedProducts);
+  const isLoading = useSelector((state) => state.product.isLoading)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setIsLoading(true));
@@ -43,8 +44,9 @@ function Home() {
         ))
       ) : (
         <Typography>
-          Uh-oh, no products present in the filtered Combination. Please try
-          filter with valid Combination
+          {!isLoading
+            ? "Uh-oh, no products present in the filtered Combination. Please try filter with valid Combination"
+            : "Please wait untill we load data"}
         </Typography>
       )}
     </Grid2>

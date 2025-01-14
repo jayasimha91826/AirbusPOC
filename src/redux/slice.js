@@ -131,7 +131,7 @@ const productSlice = createSlice({
       state.brandFilterKeys = [];
       state.typeFilterKeys = [];
       state.searchedProducts = state.products;
-      state.isFiltersCleared = true;
+      state.isFiltersCleared = !state.isFiltersCleared;
     },
     setCartCount: (state, action) => {
       if (state.cartITems.length > 0) {

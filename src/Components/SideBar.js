@@ -1,5 +1,5 @@
 import { Button, Grid2, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FilterOptions from "./FilterOptions";
 import {
@@ -24,11 +24,18 @@ const SideBar = () => {
     setSelectedColor(item);
     dispatch(setColorFilter(item));
     dispatch(searchedProducts(item));
+    dispatch(clearFilterOptions());
   };
 
   const handleClearFilter = () => {
     dispatch(clearFilterOptions());
   };
+
+  useEffect(() => {
+    if (isFiltersCleared) {
+      setSelectedColor("");
+    }
+  }, [isFiltersCleared]);
   return (
     <Grid2 container direction="column" rowGap={2} paddingLeft={2}>
       <Grid2 item>
@@ -59,7 +66,9 @@ const SideBar = () => {
                     ? "3px #1976d2 solid"
                     : "1px black solid",
               }}
-            ></div>
+            >
+              {" "}
+            </div>
           ))}
         </Grid2>
       </Grid2>

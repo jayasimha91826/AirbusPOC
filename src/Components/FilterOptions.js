@@ -1,5 +1,5 @@
 import { Grid2, Radio, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import {
 
 const FilterOptions = ({ data, isType }) => {
   const [selectedType, setSelectedType] = useState("");
+  const [selectedBrands, setSelectedBrands] = useState({});
+  const [checkedItems, setCheckedItems] = useState({});
   const isFiltersCleared = useSelector(
     (state) => state.product.isFiltersCleared
   );
@@ -35,6 +37,10 @@ const FilterOptions = ({ data, isType }) => {
           })
         );
       }
+      setCheckedItems((prev) => ({
+        ...prev,
+        [event.target.value]: event.target.checked,
+      }));
     } else {
       dispatch(
         setBrandFilter({
@@ -42,9 +48,21 @@ const FilterOptions = ({ data, isType }) => {
           isChecked: event.target.checked,
         })
       );
+      setSelectedBrands((prev) => ({
+        ...prev,
+        [event.target.value]: event.target.checked,
+      }));
     }
     dispatch(searchedProducts(event.target.value));
   };
+
+  useEffect(() => {
+    if (isFiltersCleared) {
+      // Reset all checkboxes when filters are cleared
+      setCheckedItems({});
+      setSelectedBrands({})
+    }
+  }, [isFiltersCleared]);
 
   return (
     <Grid2
@@ -73,14 +91,15 @@ const FilterOptions = ({ data, isType }) => {
               control={
                 isType ? (
                   <Radio
-                    onClick={handleChange}
+                    onChange={handleChange}
                     value={item}
                     checked={
-                      isType ? selectedType === item : isFiltersCleared && false
+                       checkedItems[item] || false
                     }
                   />
                 ) : (
-                  <Checkbox onClick={handleChange} value={item} 
+                  <Checkbox onChange={handleChange} value={item} 
+                  checked={selectedBrands[item] || false}
                   //  checked={
                   //   !isFiltersCleared
                   // }

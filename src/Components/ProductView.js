@@ -99,7 +99,7 @@ const ProductView = ({ open, data, close }) => {
             columnGap={4}
             sx={{ backgroundColor: "#B0C4DE", padding: "10px" }}
           >
-            <Typography>Description</Typography>
+            <Typography sx={{color:'#d1007e'}}>Description</Typography>
             <Typography>Reviews</Typography>
           </Grid2>
           <Grid2 item>
