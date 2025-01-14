@@ -1,27 +1,34 @@
 import { Button, Grid2, Typography } from "@mui/material";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FilterOptions from "./FilterOptions";
-import { clearFilterOptions, searchedProducts, setBrandFilter, setColorFilter, setTypeFilter } from "../redux/slice";
+import {
+  clearFilterOptions,
+  searchedProducts,
+  setBrandFilter,
+  setColorFilter,
+  setTypeFilter,
+} from "../redux/slice";
 
 const SideBar = () => {
-  const [selectedColor,setSelectedColor] = useState("")
+  const [selectedColor, setSelectedColor] = useState("");
   const dispatch = useDispatch();
   const colours = useSelector((state) => state.product.colors);
   const brands = useSelector((state) => state.product.brands);
   const types = useSelector((state) => state.product.types);
-    const isFiltersCleared = useSelector((state) => state.product.isFiltersCleared)
+  const isFiltersCleared = useSelector(
+    (state) => state.product.isFiltersCleared
+  );
 
   const handleColorChange = (event, item) => {
-    setSelectedColor(item)
+    setSelectedColor(item);
     dispatch(setColorFilter(item));
-    dispatch(searchedProducts(item))
-    
+    dispatch(searchedProducts(item));
   };
 
   const handleClearFilter = () => {
-    dispatch(clearFilterOptions())
-  }
+    dispatch(clearFilterOptions());
+  };
   return (
     <Grid2 container direction="column" rowGap={2} paddingLeft={2}>
       <Grid2 item>
@@ -47,13 +54,22 @@ const SideBar = () => {
                 width: "25px",
                 height: "25px",
                 borderRadius: "6px",
-                border: (selectedColor===item && !isFiltersCleared)? "3px #1976d2 solid" : "1px black solid",
+                border:
+                  selectedColor === item && !isFiltersCleared
+                    ? "3px #1976d2 solid"
+                    : "1px black solid",
               }}
             ></div>
           ))}
         </Grid2>
       </Grid2>
-      <Grid2 item container justifyContent="space-between" width="90%" alignItems="center">
+      <Grid2
+        item
+        container
+        justifyContent="space-between"
+        width="90%"
+        alignItems="center"
+      >
         <Grid2 item>
           {" "}
           <Typography>BRAND</Typography>

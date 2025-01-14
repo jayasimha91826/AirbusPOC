@@ -12,17 +12,17 @@ const initialState = {
   brandFilterKeys: [],
   typeFilterKeys: [],
   colorFilterKeys: [],
-  searchKey:'',
-  isLoading:false,
-  isFiltersCleared:false
+  searchKey: "",
+  isLoading: false,
+  isFiltersCleared: false,
 };
 
 const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    setIsLoading:(state,action) => {
-      state.isLoading = action.payload
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
     setProducts: (state, action) => {
       state.products = action.payload;
@@ -39,16 +39,23 @@ const productSlice = createSlice({
     },
     setBrandFilter: (state, action) => {
       if (action.payload.isChecked) {
-        state.brandFilterKeys = [...state.brandFilterKeys, action.payload.value];
+        state.brandFilterKeys = [
+          ...state.brandFilterKeys,
+          action.payload.value,
+        ];
       } else {
-        state.brandFilterKeys = state.brandFilterKeys.filter((item) => item!==action.payload.value);
+        state.brandFilterKeys = state.brandFilterKeys.filter(
+          (item) => item !== action.payload.value
+        );
       }
     },
     setTypeFilter: (state, action) => {
       if (action.payload.isChecked) {
         state.typeFilterKeys = [...state.typeFilterKeys, action.payload.value];
       } else {
-        state.typeFilterKeys = state.typeFilterKeys.filter((item) => item!==action.payload.value);
+        state.typeFilterKeys = state.typeFilterKeys.filter(
+          (item) => item !== action.payload.value
+        );
       }
     },
     setColorFilter: (state, action) => {
@@ -71,13 +78,13 @@ const productSlice = createSlice({
         const isBrandPresent = state.brandFilterKeys.find(
           (item) => item === action.payload
         );
-        state.searchedProducts = state.products.filter((item) =>  item.pdtCategory === isBrandPresent
+        state.searchedProducts = state.products.filter(
+          (item) => item.pdtCategory === isBrandPresent
         );
       } else if (state.typeFilterKeys.length > 0) {
         const isTypePresent = state.typeFilterKeys.find(
           (item) => item === action.payload
         );
-        debugger
         state.searchedProducts = state.products.filter((item) => {
           return item.pdtType === isTypePresent;
         });
@@ -102,13 +109,12 @@ const productSlice = createSlice({
             item.color === isColorPresent
           );
         });
-      } else if(state.searchKey !== "") {
+      } else if (state.searchKey !== "") {
         state.searchedProducts = state.products.filter((item) =>
           item.pdtName.toLowerCase().includes(action.payload)
         );
-      }
-      else{
-        state.searchedProducts = state.products
+      } else {
+        state.searchedProducts = state.products;
       }
     },
     clearCartItems: (state, action) => {
@@ -120,12 +126,12 @@ const productSlice = createSlice({
       );
       state.cartCount = state.cartCount - 1;
     },
-    clearFilterOptions : (state) => {
+    clearFilterOptions: (state) => {
       state.colorFilterKeys = [];
-      state.brandFilterKeys=[];
-      state.typeFilterKeys=[];
-      state.searchedProducts=state.products
-      state.isFiltersCleared=true
+      state.brandFilterKeys = [];
+      state.typeFilterKeys = [];
+      state.searchedProducts = state.products;
+      state.isFiltersCleared = true;
     },
     setCartCount: (state, action) => {
       if (state.cartITems.length > 0) {
@@ -163,7 +169,7 @@ export const {
   setBrandFilter,
   setColorFilter,
   setTypeFilter,
-  clearFilterOptions
+  clearFilterOptions,
 } = productSlice.actions;
 
 export default productSlice.reducer;

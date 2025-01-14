@@ -11,29 +11,29 @@ import {
 
 const FilterOptions = ({ data, isType }) => {
   const [selectedType, setSelectedType] = useState("");
-  const isFiltersCleared = useSelector((state) => state.product.isFiltersCleared)
+  const isFiltersCleared = useSelector(
+    (state) => state.product.isFiltersCleared
+  );
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     if (isType) {
       if (selectedType === event.target.value) {
-        debugger;
         setSelectedType(null);
         dispatch(
-            setTypeFilter({
-              value: event.target.value,
-              isChecked: false,
-            })
-          );
+          setTypeFilter({
+            value: event.target.value,
+            isChecked: false,
+          })
+        );
       } else {
-        debugger;
         setSelectedType(event.target.value);
         dispatch(
-            setTypeFilter({
-              value: event.target.value,
-              isChecked: true,
-            })
-          );
+          setTypeFilter({
+            value: event.target.value,
+            isChecked: true,
+          })
+        );
       }
     } else {
       dispatch(
@@ -75,10 +75,16 @@ const FilterOptions = ({ data, isType }) => {
                   <Radio
                     onClick={handleChange}
                     value={item}
-                    checked={isType ? selectedType === item : isFiltersCleared && false}
+                    checked={
+                      isType ? selectedType === item : isFiltersCleared && false
+                    }
                   />
                 ) : (
-                  <Checkbox onClick={handleChange} value={item} />
+                  <Checkbox onClick={handleChange} value={item} 
+                  //  checked={
+                  //   !isFiltersCleared
+                  // }
+                  />
                 )
               }
             />

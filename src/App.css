@@ -1,43 +1,42 @@
 body {
   height: 100vh;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.content{
+.content {
   height: calc(100vh - 64px);
 }
 
-.color-div{
+.color-div {
   text-align: center;
-    background-color: black;
-    color: white;
-    width: 100px;
-    position: absolute;
-    right: 0;
-    padding: 6px;
-    text-transform: capitalize;
-    top: 8px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+  background-color: black;
+  color: white;
+  width: 100px;
+  position: absolute;
+  right: 0;
+  padding: 6px;
+  text-transform: capitalize;
+  top: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
-.add-button{
+.add-button {
   text-transform: capitalize !important;
   color: #d1007e !important;
   text-decoration: underline !important;
 }
-:root .MuiIconButton-root{
+:root .MuiIconButton-root {
   padding: 0px !important;
 }
-:root .MuiToolbar-root
-{
+:root .MuiToolbar-root {
   background: linear-gradient(to bottom, #4b0082, #d1007e) !important;
   color: white;
 }
 .truncate {
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .App-header {
@@ -61,19 +60,18 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
   border-radius: 6px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 6px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-  border-radius: 6px; 
+  border-radius: 6px;
 }
-
