@@ -7,6 +7,25 @@ body {
   height: calc(100vh - 64px);
 }
 
+.color-div{
+  text-align: center;
+    background-color: black;
+    color: white;
+    width: 100px;
+    position: absolute;
+    right: 0;
+    padding: 6px;
+    text-transform: capitalize;
+    top: 8px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.add-button{
+  text-transform: capitalize !important;
+  color: #d1007e !important;
+  text-decoration: underline !important;
+}
 :root .MuiIconButton-root{
   padding: 0px !important;
 }
