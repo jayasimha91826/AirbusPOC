@@ -6,7 +6,11 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Button, Grid2, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCartItems, setCartCount, updateCartQuantity } from "../redux/slice";
+import {
+  clearCartItems,
+  setCartCount,
+  updateCartQuantity,
+} from "../redux/slice";
 import cancel from "../assets/cancel.svg";
 import ProductView from "./ProductView";
 
@@ -46,7 +50,7 @@ const ProductCard = ({ cardData }) => {
 
   return (
     <>
-      <Card onClick={handlePreview}>
+      <Card    onClick={handlePreview}>
         <CardActionArea>
           <div className="color-div">{cardData.color}</div>
           {window.location.href.includes("cart") && (
@@ -93,39 +97,56 @@ const ProductCard = ({ cardData }) => {
             >
               {cardData.pdtCategory}
             </Typography>
-            <Grid2 container alignItems="center" justifyContent="space-between">
+            <Grid2
+              container
+              alignItems="center"
+              justifyContent="space-between"
+              rowGap={1}
+            >
               <Grid2 item>
                 <Typography>{`$ ${cardData.pdtPrice}`}</Typography>
               </Grid2>
-              <Grid2 item>
-                {itemInCart ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      onClick={(event) => handleQuantityChange(event, -1)}
-                    >
-                      -
-                    </Button>
-                    <Typography>{itemInCart.quantity}</Typography>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      onClick={(event) => handleQuantityChange(event, 1)}
-                    >
-                      +
-                    </Button>
-                  </div>
-                ) : (
+              {!itemInCart && (
+                <Grid2 item>
                   <Button
                     className="add-button"
                     onClick={(event) => handleAddToCart(event, cardData)}
                   >
                     Add to Cart
                   </Button>
-                )}
-              </Grid2>
+                </Grid2>
+              )}
             </Grid2>
+            {/* <Grid2 item> */}
+            {itemInCart && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "6px",
+                  gap: "10px",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={(event) => handleQuantityChange(event, -1)}
+                  sx={{backgroundColor:'#d1007e'}}
+                >
+                  <Typography fontSize="14px">-</Typography>
+                </Button>
+                <Typography>{itemInCart.quantity}</Typography>
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={(event) => handleQuantityChange(event, 1)}
+                  sx={{backgroundColor:'#d1007e'}}
+                >
+                  <Typography fontSize="14px">+</Typography>
+                </Button>
+              </div>
+            )}
+            {/* </Grid2> */}
           </CardContent>
         </CardActionArea>
       </Card>

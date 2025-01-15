@@ -15,8 +15,10 @@ import cancel from "../assets/cancel.svg";
 
 const ProductView = ({ open, data, close }) => {
   const dispatch = useDispatch();
+  
   const handleAddToCart = (event, data) => {
     dispatch(setCartCount(data));
+    close(false)
   };
 
   const handleCancel = () => {
