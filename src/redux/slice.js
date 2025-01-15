@@ -24,6 +24,39 @@ const productSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setCartCount: (state, action) => {
+      const existingItem = state.cartITems.find((item) => item.id === action.payload.id);
+    
+      if (existingItem) {
+        // If item exists, increase its quantity
+        existingItem.quantity += 1;
+      } else {
+        // Add new item with quantity 1
+        const newItem = { ...action.payload, quantity: 1 };
+        state.cartITems.push(newItem);
+        state.searchedCartItems.push(newItem);
+        state.cartCount += 1; // Update cart count for unique items
+      }
+    },
+    
+    
+    updateCartQuantity: (state, action) => {
+      const { id, quantity } = action.payload;
+    
+      const existingItem = state.cartITems.find(item => item.id === id);
+      if (existingItem) {
+        // Update the quantity
+        existingItem.quantity = quantity;
+    
+        // Remove the item if quantity becomes 0
+        if (quantity <= 0) {
+          state.cartITems = state.cartITems.filter(item => item.id !== id);
+          state.searchedCartItems = state.searchedCartItems.filter(item => item.id !== id);
+          state.cartCount -= 1;
+        }
+      }
+    },
+    
     setProducts: (state, action) => {
       state.products = action.payload;
       state.searchedProducts = action.payload;
@@ -133,29 +166,7 @@ const productSlice = createSlice({
       state.searchedProducts = state.products;
       state.isFiltersCleared = !state.isFiltersCleared;
     },
-    setCartCount: (state, action) => {
-      if (state.cartITems.length > 0) {
-        let flag = 0;
-        for (let i of state.cartITems) {
-          if (i.id === action.payload.id) {
-            flag = 1;
-            break;
-          }
-        }
-        if (flag === 0) {
-          state.cartCount = state.cartCount + 1;
-          state.cartITems = [...state.cartITems, action.payload];
-          state.searchedCartItems = [
-            ...state.searchedCartItems,
-            action.payload,
-          ];
-        }
-      } else {
-        state.cartITems = [action.payload];
-        state.searchedCartItems = [action.payload];
-        state.cartCount = state.cartCount + 1;
-      }
-    },
+    
   },
 });
 
@@ -163,6 +174,7 @@ export const {
   setIsLoading,
   setProducts,
   clearCartItems,
+  updateCartQuantity,
   setCartCount,
   searchedProducts,
   cartItemsFilter,
